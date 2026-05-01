@@ -1,0 +1,52 @@
+{
+  "groups": [
+    {
+      "name": "jwt",
+      "type": "java.lang.Object",
+      "sourceType": "custom properties",
+      "description": "JWT configuration properties"
+    },
+    {
+      "name": "app.cors",
+      "type": "java.lang.Object",
+      "description": "CORS configuration"
+    },
+    {
+      "name": "app.bootstrap",
+      "type": "java.lang.Object",
+      "description": "Bootstrap admin user"
+    }
+  ],
+  "properties": [
+    {
+      "name": "jwt.secret",
+      "type": "java.lang.String",
+      "description": "Secret key used to sign and validate JWT tokens"
+    },
+    {
+      "name": "jwt.expiration",
+      "type": "java.lang.Long",
+      "description": "JWT expiration time in milliseconds"
+    },
+    {
+      "name": "app.cors.allowed-origins",
+      "type": "java.lang.String",
+      "description": "Comma-separated list of allowed origins for CORS"
+    },
+    {
+      "name": "app.bootstrap.admin-name",
+      "type": "java.lang.String",
+      "description": "Default admin user full name"
+    },
+    {
+      "name": "app.bootstrap.admin-email",
+      "type": "java.lang.String",
+      "description": "Default admin email address"
+    },
+    {
+      "name": "app.bootstrap.admin-password",
+      "type": "java.lang.String",
+      "description": "Default admin password (only used during bootstrap)"
+    }
+  ]
+}
