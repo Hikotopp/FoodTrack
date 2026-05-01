@@ -3,6 +3,8 @@ package com.foodtrack.spring.springboot_application.config;
 import com.foodtrack.spring.springboot_application.domain.exception.BusinessRuleException;
 import com.foodtrack.spring.springboot_application.domain.exception.ResourceNotFoundException;
 import jakarta.validation.ConstraintViolationException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
@@ -16,6 +18,8 @@ import java.util.Map;
 
 @RestControllerAdvice
 public class RestExceptionHandler {
+
+    private static final Logger logger = LoggerFactory.getLogger(RestExceptionHandler.class);
 
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<Map<String, Object>> handleNotFound(ResourceNotFoundException exception) {
@@ -40,6 +44,7 @@ public class RestExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Map<String, Object>> handleUnexpectedError(Exception exception) {
+        logger.error("Unexpected server error", exception);
         return buildResponse(HttpStatus.INTERNAL_SERVER_ERROR, "Unexpected server error.");
     }
 

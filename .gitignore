@@ -1,6 +1,8 @@
 ﻿node_modules/
 foodtrack/node_modules/
 springboot-application/target/
+springboot-application/logs/
+*.log
 *.msi
 .env
 .qodo/
