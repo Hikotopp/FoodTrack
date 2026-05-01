@@ -1,0 +1,7 @@
+﻿node_modules/
+foodtrack/node_modules/
+springboot-application/target/
+*.msi
+.env
+.qodo/
+.infcode/
