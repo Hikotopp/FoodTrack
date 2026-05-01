@@ -29,6 +29,7 @@ class SecurityConfigurationTest {
 
     @Test
     @DisplayName("Should reject public registration endpoint without JWT")
+    @SuppressWarnings("null")
     void shouldRejectPublicRegistrationEndpointWithoutJwt() throws Exception {
         mockMvc.perform(post("/api/auth/register")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -44,6 +45,7 @@ class SecurityConfigurationTest {
 
     @Test
     @DisplayName("Should reject protected table creation without JWT")
+    @SuppressWarnings("null")
     void shouldRejectProtectedTableCreationWithoutJwt() throws Exception {
         mockMvc.perform(post("/api/tables")
                         .contentType(MediaType.APPLICATION_JSON)

@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.time.OffsetDateTime;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestControllerAdvice
 public class RestExceptionHandler {
@@ -22,38 +24,54 @@ public class RestExceptionHandler {
     private static final Logger logger = LoggerFactory.getLogger(RestExceptionHandler.class);
 
     @ExceptionHandler(ResourceNotFoundException.class)
-    public ResponseEntity<Map<String, Object>> handleNotFound(ResourceNotFoundException exception) {
-        return buildResponse(HttpStatus.NOT_FOUND, exception.getMessage());
+    public ResponseEntity<ApiErrorResponse> handleNotFound(ResourceNotFoundException exception) {
+        return buildResponse(HttpStatus.NOT_FOUND, exception.getMessage(), null, Collections.emptyMap());
     }
 
-    @ExceptionHandler({BusinessRuleException.class, MethodArgumentNotValidException.class, ConstraintViolationException.class})
-    public ResponseEntity<Map<String, Object>> handleBadRequest(Exception exception) {
-        String message = exception instanceof MethodArgumentNotValidException methodArgumentNotValidException
-                ? methodArgumentNotValidException.getBindingResult().getFieldErrors().stream()
-                .findFirst()
-                .map(error -> error.getField() + " " + error.getDefaultMessage())
-                .orElse("Validation error")
-                : exception.getMessage();
-        return buildResponse(HttpStatus.BAD_REQUEST, message);
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<ApiErrorResponse> handleValidation(MethodArgumentNotValidException exception) {
+        Map<String, String> errors = exception.getBindingResult().getFieldErrors().stream()
+                .collect(Collectors.toMap(
+                        error -> error.getField(),
+                        error -> error.getDefaultMessage() == null ? "Invalid value" : error.getDefaultMessage(),
+                        (current, ignored) -> current,
+                        LinkedHashMap::new
+                ));
+        String field = errors.keySet().stream().findFirst().orElse(null);
+        String message = field == null ? "Validation error" : field + " " + errors.get(field);
+        return buildResponse(HttpStatus.BAD_REQUEST, message, field, errors);
+    }
+
+    @ExceptionHandler({BusinessRuleException.class, ConstraintViolationException.class})
+    public ResponseEntity<ApiErrorResponse> handleBadRequest(Exception exception) {
+        return buildResponse(HttpStatus.BAD_REQUEST, exception.getMessage(), null, Collections.emptyMap());
     }
 
     @ExceptionHandler(AccessDeniedException.class)
-    public ResponseEntity<Map<String, Object>> handleAccessDenied(AccessDeniedException exception) {
-        return buildResponse(HttpStatus.FORBIDDEN, "You do not have permission to perform this action.");
+    public ResponseEntity<ApiErrorResponse> handleAccessDenied(AccessDeniedException exception) {
+        return buildResponse(HttpStatus.FORBIDDEN, "You do not have permission to perform this action.", null, Collections.emptyMap());
     }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<Map<String, Object>> handleUnexpectedError(Exception exception) {
+    public ResponseEntity<ApiErrorResponse> handleUnexpectedError(Exception exception) {
         logger.error("Unexpected server error", exception);
-        return buildResponse(HttpStatus.INTERNAL_SERVER_ERROR, "Unexpected server error.");
+        return buildResponse(HttpStatus.INTERNAL_SERVER_ERROR, "Unexpected server error.", null, Collections.emptyMap());
     }
 
-    private ResponseEntity<Map<String, Object>> buildResponse(HttpStatus status, String message) {
-        Map<String, Object> body = new LinkedHashMap<>();
-        body.put("timestamp", OffsetDateTime.now().toString());
-        body.put("status", status.value());
-        body.put("error", status.getReasonPhrase());
-        body.put("message", message);
+    private ResponseEntity<ApiErrorResponse> buildResponse(
+            HttpStatus status,
+            String message,
+            String field,
+            Map<String, String> errors
+    ) {
+        ApiErrorResponse body = new ApiErrorResponse(
+                OffsetDateTime.now(),
+                status.value(),
+                status.getReasonPhrase(),
+                message,
+                field,
+                errors
+        );
         return ResponseEntity.status(status).body(body);
     }
 }

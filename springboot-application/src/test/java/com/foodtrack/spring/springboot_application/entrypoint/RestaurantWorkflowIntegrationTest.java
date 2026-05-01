@@ -30,6 +30,7 @@ class RestaurantWorkflowIntegrationTest {
 
     @Test
     @DisplayName("Should create employee, process an order and expose it in sales history")
+    @SuppressWarnings("null")
     void shouldProcessCompleteRestaurantWorkflow() throws Exception {
         String adminToken = login("admin@test.local", "Admin123!");
 
@@ -93,6 +94,7 @@ class RestaurantWorkflowIntegrationTest {
                 .andExpect(jsonPath("$[0].lines[0].quantity").value(2));
     }
 
+    @SuppressWarnings("null")
     private String login(String email, String password) throws Exception {
         MvcResult result = mockMvc.perform(post("/api/auth/login")
                         .contentType(MediaType.APPLICATION_JSON)
