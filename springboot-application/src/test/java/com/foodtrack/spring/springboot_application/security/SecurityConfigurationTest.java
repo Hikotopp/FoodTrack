@@ -28,8 +28,8 @@ class SecurityConfigurationTest {
     }
 
     @Test
-    @DisplayName("Should allow public registration endpoint")
-    void shouldAllowPublicRegistrationEndpoint() throws Exception {
+    @DisplayName("Should reject public registration endpoint without JWT")
+    void shouldRejectPublicRegistrationEndpointWithoutJwt() throws Exception {
         mockMvc.perform(post("/api/auth/register")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
@@ -39,7 +39,7 @@ class SecurityConfigurationTest {
                                   "password": "Admin123!"
                                 }
                                 """))
-                .andExpect(status().isCreated());
+                .andExpect(status().isForbidden());
     }
 
     @Test

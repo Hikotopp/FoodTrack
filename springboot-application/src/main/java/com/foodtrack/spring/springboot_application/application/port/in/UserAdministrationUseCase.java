@@ -6,6 +6,7 @@ import com.foodtrack.spring.springboot_application.domain.model.UserRole;
 import java.util.List;
 
 public interface UserAdministrationUseCase {
+    UserAccountView createUser(String fullName, String email, String rawPassword, UserRole role);
     List<UserAccountView> listUsers();
     UserAccountView updateRole(Long userId, UserRole role);
 }
