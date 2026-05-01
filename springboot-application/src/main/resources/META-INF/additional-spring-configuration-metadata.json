@@ -15,6 +15,11 @@
       "name": "app.bootstrap",
       "type": "java.lang.Object",
       "description": "Bootstrap admin user"
+    },
+    {
+      "name": "app.seed",
+      "type": "java.lang.Object",
+      "description": "Initial data seeding configuration"
     }
   ],
   "properties": [
@@ -47,6 +52,12 @@
       "name": "app.bootstrap.admin-password",
       "type": "java.lang.String",
       "description": "Default admin password (only used during bootstrap)"
+    },
+    {
+      "name": "app.seed.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether initial sample data should be created on startup",
+      "defaultValue": true
     }
   ]
 }

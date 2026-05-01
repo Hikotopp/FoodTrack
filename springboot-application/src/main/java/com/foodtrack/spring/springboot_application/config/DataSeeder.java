@@ -11,6 +11,7 @@ import com.foodtrack.spring.springboot_application.domain.model.TableStatus;
 import com.foodtrack.spring.springboot_application.domain.model.UserRole;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -23,6 +24,7 @@ import java.util.Locale;
 public class DataSeeder {
 
     @Bean
+    @ConditionalOnProperty(name = "app.seed.enabled", havingValue = "true", matchIfMissing = true)
     ApplicationRunner seedInitialData(
             UserRepositoryPort userRepositoryPort,
             MenuItemRepositoryPort menuItemRepositoryPort,

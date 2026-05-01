@@ -101,6 +101,13 @@
             <scope>runtime</scope>
             <optional>true</optional>
         </dependency>
+
+        <!-- Metadata para autocompletado y validacion de propiedades custom -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
         
         <!-- OpenAPI / Swagger -->
         <dependency>
