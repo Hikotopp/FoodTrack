@@ -32,6 +32,7 @@ public class RestaurantTableRepositoryAdapter implements RestaurantTableReposito
     }
 
     @Override
+    @SuppressWarnings("null")
     public Optional<RestaurantTable> findById(Long id) {
         return jpaRestaurantTableRepository.findById(id).map(restaurantTableMapper::toDomain);
     }
@@ -42,6 +43,7 @@ public class RestaurantTableRepositoryAdapter implements RestaurantTableReposito
     }
 
     @Override
+    @SuppressWarnings("null")
     public RestaurantTable save(RestaurantTable table) {
         return restaurantTableMapper.toDomain(jpaRestaurantTableRepository.save(restaurantTableMapper.toEntity(table)));
     }

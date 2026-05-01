@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import com.foodtrack.spring.springboot_application.domain.model.OrderStatus;
 
 public interface CustomerOrderRepositoryPort {
     Optional<CustomerOrder> findOpenByTableId(Long tableId);
@@ -14,4 +15,5 @@ public interface CustomerOrderRepositoryPort {
     void deleteById(Long id);
     Optional<CustomerOrder> findById(Long id);
     List<CustomerOrder> findByTableId(Long tableId);
+    List<CustomerOrder> findByStatuses(List<OrderStatus> statuses);
 }

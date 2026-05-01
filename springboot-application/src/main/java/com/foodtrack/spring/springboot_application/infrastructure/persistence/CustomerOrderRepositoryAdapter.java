@@ -2,6 +2,7 @@ package com.foodtrack.spring.springboot_application.infrastructure.persistence;
 
 import com.foodtrack.spring.springboot_application.application.port.out.CustomerOrderRepositoryPort;
 import com.foodtrack.spring.springboot_application.domain.model.CustomerOrder;
+import com.foodtrack.spring.springboot_application.domain.model.OrderStatus;
 import com.foodtrack.spring.springboot_application.infrastructure.persistence.mapper.CustomerOrderMapper;
 import org.springframework.stereotype.Component;
 
@@ -51,16 +52,19 @@ public class CustomerOrderRepositoryAdapter implements CustomerOrderRepositoryPo
     }
 
     @Override
+    @SuppressWarnings("null")
     public CustomerOrder save(CustomerOrder order) {
         return customerOrderMapper.toDomain(jpaCustomerOrderRepository.save(customerOrderMapper.toEntity(order)));
     }
 
     @Override
+    @SuppressWarnings("null")
     public void deleteById(Long id) {
         jpaCustomerOrderRepository.deleteById(id);
     }
 
     @Override
+    @SuppressWarnings("null")
     public Optional<CustomerOrder> findById(Long id) {
         return jpaCustomerOrderRepository.findById(id).map(customerOrderMapper::toDomain);
     }
@@ -68,6 +72,15 @@ public class CustomerOrderRepositoryAdapter implements CustomerOrderRepositoryPo
     @Override
     public List<CustomerOrder> findByTableId(Long tableId) {
         return jpaCustomerOrderRepository.findByTableIdOrderByCreatedAtDesc(tableId).stream()
+                .map(customerOrderMapper::toDomain)
+                .toList();
+    }
+
+    @Override
+    public List<CustomerOrder> findByStatuses(List<OrderStatus> statuses) {
+        return jpaCustomerOrderRepository.findByStatusInOrderByUpdatedAtDesc(
+                        statuses.stream().map(OrderStatus::name).toList()
+                ).stream()
                 .map(customerOrderMapper::toDomain)
                 .toList();
     }

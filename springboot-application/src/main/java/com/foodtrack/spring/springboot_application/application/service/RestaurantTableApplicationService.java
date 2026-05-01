@@ -100,7 +100,9 @@ public class RestaurantTableApplicationService implements TableUseCase {
         });
 
         getTable(tableId);
-        restaurantTableRepositoryPort.deleteById(tableId);
+        if (tableId != null) {
+            restaurantTableRepositoryPort.deleteById(tableId);
+        }
         logger.info("Table {} deleted successfully", tableId);
     }
 
@@ -126,6 +128,9 @@ public class RestaurantTableApplicationService implements TableUseCase {
     public TableDashboardView addOrderLine(Long tableId, Long menuItemId, int quantity, String currentUserEmail) {
         logger.info("Adding order line: tableId={}, menuItemId={}, quantity={}, user={}", tableId, menuItemId, quantity, currentUserEmail);
         RestaurantTable table = getTable(tableId);
+        if (menuItemId == null) {
+            throw new IllegalArgumentException("Menu item ID cannot be null");
+        }
         MenuItem menuItem = menuItemRepositoryPort.findById(menuItemId)
                 .orElseThrow(() -> {
                     logger.error("Menu item not found: {}", menuItemId);

@@ -1,4 +1,20 @@
 {
+    "java.home": "C:\\Users\\jacob\\.jdk\\jdk-21.0.10",
+    "java.runtimes": [
+        {
+            "name": "JavaSE-21",
+            "path": "C:\\Users\\jacob\\.jdk\\jdk-21.0.10",
+            "default": true
+        },
+        {
+            "name": "JavaSE-17",
+            "path": "C:\\Program Files\\Java\\jdk-17.0.18"
+        },
+        {
+            "name": "JavaSE-25",
+            "path": "C:\\Users\\jacob\\.jdk\\jdk-25.0.2"
+        }
+    ],
     "java.compile.nullAnalysis.mode": "automatic",
     "java.configuration.updateBuildConfiguration": "interactive",
     "CodeGPT.apiKey": "Anthropic"

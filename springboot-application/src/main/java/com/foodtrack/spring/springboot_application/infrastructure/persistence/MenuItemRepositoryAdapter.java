@@ -34,6 +34,7 @@ public class MenuItemRepositoryAdapter implements MenuItemRepositoryPort {
     }
 
     @Override
+    @SuppressWarnings("null")
     public MenuItem save(MenuItem menuItem) {
         return menuItemMapper.toDomain(jpaMenuItemRepository.save(menuItemMapper.toEntity(menuItem)));
     }
