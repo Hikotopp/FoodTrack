@@ -2,6 +2,7 @@ package com.foodtrack.spring.springboot_application.application.service;
 
 import com.foodtrack.spring.springboot_application.application.model.UserAccountView;
 import com.foodtrack.spring.springboot_application.application.port.in.UserAdministrationUseCase;
+import com.foodtrack.spring.springboot_application.application.port.out.CustomerOrderRepositoryPort;
 import com.foodtrack.spring.springboot_application.application.port.out.UserRepositoryPort;
 import com.foodtrack.spring.springboot_application.domain.exception.BusinessRuleException;
 import com.foodtrack.spring.springboot_application.domain.exception.ResourceNotFoundException;
@@ -20,10 +21,16 @@ import java.util.Locale;
 public class UserAdministrationApplicationService implements UserAdministrationUseCase {
 
     private final UserRepositoryPort userRepositoryPort;
+    private final CustomerOrderRepositoryPort customerOrderRepositoryPort;
     private final PasswordEncoder passwordEncoder;
 
-    public UserAdministrationApplicationService(UserRepositoryPort userRepositoryPort, PasswordEncoder passwordEncoder) {
+    public UserAdministrationApplicationService(
+            UserRepositoryPort userRepositoryPort,
+            CustomerOrderRepositoryPort customerOrderRepositoryPort,
+            PasswordEncoder passwordEncoder
+    ) {
         this.userRepositoryPort = userRepositoryPort;
+        this.customerOrderRepositoryPort = customerOrderRepositoryPort;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -66,6 +73,32 @@ public class UserAdministrationApplicationService implements UserAdministrationU
                 role
         ));
         return toView(updated);
+    }
+
+    @Override
+    public void deleteUser(Long userId, String currentUserEmail) {
+        AppUser user = userRepositoryPort.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("User was not found."));
+
+        if (user.email().equals(normalizeEmail(currentUserEmail))) {
+            throw new BusinessRuleException("You cannot delete your own account.");
+        }
+
+        if (user.role() == UserRole.ADMIN && countAdmins() <= 1) {
+            throw new BusinessRuleException("At least one administrator account must remain active.");
+        }
+
+        if (customerOrderRepositoryPort.existsByCreatedByUserId(userId)) {
+            throw new BusinessRuleException("This user has sales history and cannot be deleted.");
+        }
+
+        userRepositoryPort.deleteById(userId);
+    }
+
+    private long countAdmins() {
+        return userRepositoryPort.findAll().stream()
+                .filter(user -> user.role() == UserRole.ADMIN)
+                .count();
     }
 
     private UserAccountView toView(AppUser user) {

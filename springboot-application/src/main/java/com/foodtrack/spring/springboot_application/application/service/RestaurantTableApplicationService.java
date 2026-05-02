@@ -16,6 +16,7 @@ import com.foodtrack.spring.springboot_application.domain.model.OrderLine;
 import com.foodtrack.spring.springboot_application.domain.model.OrderStatus;
 import com.foodtrack.spring.springboot_application.domain.model.RestaurantTable;
 import com.foodtrack.spring.springboot_application.domain.model.TableStatus;
+import com.foodtrack.spring.springboot_application.domain.service.OrderCalculator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -23,7 +24,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
@@ -39,17 +39,20 @@ public class RestaurantTableApplicationService implements TableUseCase {
     private final CustomerOrderRepositoryPort customerOrderRepositoryPort;
     private final MenuItemRepositoryPort menuItemRepositoryPort;
     private final UserRepositoryPort userRepositoryPort;
+    private final OrderCalculator orderCalculator;
 
     public RestaurantTableApplicationService(
             RestaurantTableRepositoryPort restaurantTableRepositoryPort,
             CustomerOrderRepositoryPort customerOrderRepositoryPort,
             MenuItemRepositoryPort menuItemRepositoryPort,
-            UserRepositoryPort userRepositoryPort
+            UserRepositoryPort userRepositoryPort,
+            OrderCalculator orderCalculator
     ) {
         this.restaurantTableRepositoryPort = restaurantTableRepositoryPort;
         this.customerOrderRepositoryPort = customerOrderRepositoryPort;
         this.menuItemRepositoryPort = menuItemRepositoryPort;
         this.userRepositoryPort = userRepositoryPort;
+        this.orderCalculator = orderCalculator;
     }
 
     @Override
@@ -145,8 +148,8 @@ public class RestaurantTableApplicationService implements TableUseCase {
         CustomerOrder currentOrder = customerOrderRepositoryPort.findOpenByTableId(tableId)
                 .orElseGet(() -> createOpenOrder(tableId, user.id()));
 
-        List<OrderLine> mergedLines = mergeOrderLine(currentOrder.lines(), menuItem, quantity);
-        CustomerOrder recalculatedOrder = recalculateOrder(currentOrder, mergedLines, OrderStatus.OPEN);
+        List<OrderLine> mergedLines = orderCalculator.mergeOrderLine(currentOrder.lines(), menuItem, quantity);
+        CustomerOrder recalculatedOrder = orderCalculator.recalculate(currentOrder, mergedLines, OrderStatus.OPEN);
         customerOrderRepositoryPort.save(recalculatedOrder);
 
         if (table.status() == TableStatus.AVAILABLE || table.status() == TableStatus.CLEANING) {
@@ -162,21 +165,9 @@ public class RestaurantTableApplicationService implements TableUseCase {
     public TableDashboardView updateOrderLine(Long tableId, Long lineId, int quantity) {
         logger.info("Updating order line: tableId={}, lineId={}, new quantity={}", tableId, lineId, quantity);
         CustomerOrder currentOrder = getOpenOrder(tableId);
-        List<OrderLine> updatedLines = currentOrder.lines().stream()
-                .map(line -> line.id().equals(lineId)
-                        ? new OrderLine(
-                        line.id(),
-                        line.menuItemId(),
-                        line.itemName(),
-                        quantity,
-                        line.unitPrice(),
-                        calculateSubtotal(line.unitPrice(), quantity)
-                )
-                        : line)
-                .toList();
-
         ensureLineExists(currentOrder.lines(), lineId);
-        customerOrderRepositoryPort.save(recalculateOrder(currentOrder, updatedLines, OrderStatus.OPEN));
+        List<OrderLine> updatedLines = orderCalculator.updateQuantity(currentOrder.lines(), lineId, quantity);
+        customerOrderRepositoryPort.save(orderCalculator.recalculate(currentOrder, updatedLines, OrderStatus.OPEN));
         logger.info("Order line {} updated for table {}", lineId, tableId);
         return getDashboard(tableId);
     }
@@ -203,7 +194,7 @@ public class RestaurantTableApplicationService implements TableUseCase {
             return getDashboard(tableId);
         }
 
-        customerOrderRepositoryPort.save(recalculateOrder(currentOrder, remainingLines, OrderStatus.OPEN));
+        customerOrderRepositoryPort.save(orderCalculator.recalculate(currentOrder, remainingLines, OrderStatus.OPEN));
         logger.info("Order line {} removed from table {}", lineId, tableId);
         return getDashboard(tableId);
     }
@@ -219,7 +210,7 @@ public class RestaurantTableApplicationService implements TableUseCase {
             throw new BusinessRuleException("Cannot close an empty order.");
         }
 
-        CustomerOrder closedOrder = recalculateOrder(currentOrder, currentOrder.lines(), OrderStatus.CLOSED);
+        CustomerOrder closedOrder = orderCalculator.recalculate(currentOrder, currentOrder.lines(), OrderStatus.CLOSED);
         customerOrderRepositoryPort.save(closedOrder);
         restaurantTableRepositoryPort.save(new RestaurantTable(table.id(), table.tableNumber(), TableStatus.AVAILABLE));
         logger.info("Order closed for table {}", tableId);
@@ -250,67 +241,11 @@ public class RestaurantTableApplicationService implements TableUseCase {
         );
     }
 
-    private List<OrderLine> mergeOrderLine(List<OrderLine> currentLines, MenuItem menuItem, int quantity) {
-        List<OrderLine> mergedLines = new ArrayList<>();
-        boolean merged = false;
-
-        for (OrderLine line : currentLines) {
-            if (line.menuItemId().equals(menuItem.id())) {
-                int newQuantity = line.quantity() + quantity;
-                mergedLines.add(new OrderLine(
-                        line.id(),
-                        line.menuItemId(),
-                        line.itemName(),
-                        newQuantity,
-                        line.unitPrice(),
-                        calculateSubtotal(line.unitPrice(), newQuantity)
-                ));
-                merged = true;
-            } else {
-                mergedLines.add(line);
-            }
-        }
-
-        if (!merged) {
-            mergedLines.add(new OrderLine(
-                    null,
-                    menuItem.id(),
-                    menuItem.name(),
-                    quantity,
-                    menuItem.price(),
-                    calculateSubtotal(menuItem.price(), quantity)
-            ));
-        }
-
-        return mergedLines;
-    }
-
-    private CustomerOrder recalculateOrder(CustomerOrder order, List<OrderLine> lines, OrderStatus status) {
-        BigDecimal total = lines.stream()
-                .map(OrderLine::subtotal)
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
-
-        return new CustomerOrder(
-                order.id(),
-                order.tableId(),
-                order.createdByUserId(),
-                status,
-                total,
-                order.createdAt(),
-                LocalDateTime.now(),
-                lines
-        );
-    }
-
     private void ensureLineExists(List<OrderLine> lines, Long lineId) {
         boolean exists = lines.stream().anyMatch(line -> line.id().equals(lineId));
         if (!exists) {
             throw new ResourceNotFoundException("Order line was not found.");
         }
-    }
-
-    private BigDecimal calculateSubtotal(BigDecimal unitPrice, int quantity) {
-        return unitPrice.multiply(BigDecimal.valueOf(quantity));
     }
 
     private List<MenuItem> getSortedMenu() {

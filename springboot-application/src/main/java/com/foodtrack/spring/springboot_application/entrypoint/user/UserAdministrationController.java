@@ -8,6 +8,7 @@ import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -60,5 +61,12 @@ public class UserAdministrationController {
         return ResponseEntity.ok(userAdministrationMapper.toResponse(
                 userAdministrationUseCase.updateRole(userId, request.role())
         ));
+    }
+
+    @DeleteMapping("/{userId}")
+    @Operation(summary = "Delete a user account without sales history")
+    public ResponseEntity<Void> deleteUser(@PathVariable Long userId, Authentication authentication) {
+        userAdministrationUseCase.deleteUser(userId, authentication.getName());
+        return ResponseEntity.noContent().build();
     }
 }

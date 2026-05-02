@@ -84,4 +84,9 @@ public class CustomerOrderRepositoryAdapter implements CustomerOrderRepositoryPo
                 .map(customerOrderMapper::toDomain)
                 .toList();
     }
+
+    @Override
+    public boolean existsByCreatedByUserId(Long userId) {
+        return jpaCustomerOrderRepository.existsByCreatedByUserId(userId);
+    }
 }

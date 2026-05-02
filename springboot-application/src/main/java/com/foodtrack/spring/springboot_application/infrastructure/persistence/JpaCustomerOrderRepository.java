@@ -12,4 +12,5 @@ public interface JpaCustomerOrderRepository extends JpaRepository<CustomerOrderE
     List<CustomerOrderEntity> findByTableIdInAndStatusOrderByUpdatedAtDesc(Collection<Long> tableIds, String status);
     List<CustomerOrderEntity> findByTableIdOrderByCreatedAtDesc(Long tableId);
     List<CustomerOrderEntity> findByStatusInOrderByUpdatedAtDesc(Collection<String> statuses);
+    boolean existsByCreatedByUserId(Long userId);
 }

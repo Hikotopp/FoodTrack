@@ -9,4 +9,5 @@ public interface UserAdministrationUseCase {
     UserAccountView createUser(String fullName, String email, String rawPassword, UserRole role);
     List<UserAccountView> listUsers();
     UserAccountView updateRole(Long userId, UserRole role);
+    void deleteUser(Long userId, String currentUserEmail);
 }

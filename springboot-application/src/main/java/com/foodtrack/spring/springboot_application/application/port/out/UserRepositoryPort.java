@@ -11,5 +11,6 @@ public interface UserRepositoryPort {
     Optional<AppUser> findByEmail(String email);
     boolean existsByEmail(String email);
     AppUser save(AppUser user);
+    void deleteById(Long id);
     long count();
 }

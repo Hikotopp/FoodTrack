@@ -13,6 +13,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -33,6 +34,26 @@ class RestaurantWorkflowIntegrationTest {
     @SuppressWarnings("null")
     void shouldProcessCompleteRestaurantWorkflow() throws Exception {
         String adminToken = login("admin@test.local", "Admin123!");
+
+        String disposableEmail = "disposable.employee@example.com";
+        JsonNode disposableUser = readJson(mockMvc.perform(post("/api/users")
+                        .header(HttpHeaders.AUTHORIZATION, bearer(adminToken))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+                                {
+                                  "fullName": "Disposable Employee",
+                                  "email": "%s",
+                                  "password": "Employee123!",
+                                  "role": "EMPLOYEE"
+                                }
+                                """.formatted(disposableEmail)))
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.email").value(disposableEmail))
+                .andReturn());
+
+        mockMvc.perform(delete("/api/users/{userId}", disposableUser.get("id").asLong())
+                        .header(HttpHeaders.AUTHORIZATION, bearer(adminToken)))
+                .andExpect(status().isNoContent());
 
         String employeeEmail = "workflow.employee@example.com";
         mockMvc.perform(post("/api/users")

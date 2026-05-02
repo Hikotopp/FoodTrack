@@ -2,7 +2,9 @@ package com.foodtrack.spring.springboot_application.entrypoint.table;
 
 import com.foodtrack.spring.springboot_application.application.model.TableDashboardView;
 import com.foodtrack.spring.springboot_application.application.model.TableSummaryView;
-import com.foodtrack.spring.springboot_application.application.port.in.TableUseCase;
+import com.foodtrack.spring.springboot_application.application.port.in.OrderUseCase;
+import com.foodtrack.spring.springboot_application.application.port.in.TableAdministrationUseCase;
+import com.foodtrack.spring.springboot_application.application.port.in.TableQueryUseCase;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -22,18 +24,27 @@ import java.util.stream.Collectors;
 @SecurityRequirement(name = "bearerAuth")
 public class RestaurantTableController {
 
-    private final TableUseCase tableUseCase;
+    private final TableQueryUseCase tableQueryUseCase;
+    private final TableAdministrationUseCase tableAdministrationUseCase;
+    private final OrderUseCase orderUseCase;
     private final TableMapper tableMapper;
 
-    public RestaurantTableController(TableUseCase tableUseCase, TableMapper tableMapper) {
-        this.tableUseCase = tableUseCase;
+    public RestaurantTableController(
+            TableQueryUseCase tableQueryUseCase,
+            TableAdministrationUseCase tableAdministrationUseCase,
+            OrderUseCase orderUseCase,
+            TableMapper tableMapper
+    ) {
+        this.tableQueryUseCase = tableQueryUseCase;
+        this.tableAdministrationUseCase = tableAdministrationUseCase;
+        this.orderUseCase = orderUseCase;
         this.tableMapper = tableMapper;
     }
 
     @GetMapping
     @Operation(summary = "List all restaurant tables with totals and item counts")
     public ResponseEntity<List<TableSummaryResponse>> listTables() {
-        List<TableSummaryView> views = tableUseCase.listTables();
+        List<TableSummaryView> views = tableQueryUseCase.listTables();
         List<TableSummaryResponse> responses = views.stream()
                 .map(tableMapper::toSummaryResponse)
                 .collect(Collectors.toList());
@@ -43,7 +54,7 @@ public class RestaurantTableController {
     @GetMapping("/{tableId}")
     @Operation(summary = "Get the dashboard for a single table")
     public ResponseEntity<TableDashboardResponse> getDashboard(@PathVariable Long tableId) {
-        TableDashboardView view = tableUseCase.getDashboard(tableId);
+        TableDashboardView view = tableQueryUseCase.getDashboard(tableId);
         return ResponseEntity.ok(tableMapper.toDashboardResponse(view));
     }
 
@@ -51,7 +62,7 @@ public class RestaurantTableController {
     @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Create a new restaurant table")
     public ResponseEntity<TableSummaryResponse> createTable(@Valid @RequestBody CreateTableRequest request) {
-        TableSummaryView created = tableUseCase.createTable(request.tableNumber());
+        TableSummaryView created = tableAdministrationUseCase.createTable(request.tableNumber());
         return ResponseEntity.status(HttpStatus.CREATED).body(tableMapper.toSummaryResponse(created));
     }
 
@@ -59,7 +70,7 @@ public class RestaurantTableController {
     @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Delete a table without active orders")
     public ResponseEntity<Void> deleteTable(@PathVariable Long tableId) {
-        tableUseCase.deleteTable(tableId);
+        tableAdministrationUseCase.deleteTable(tableId);
         return ResponseEntity.noContent().build();
     }
 
@@ -69,7 +80,7 @@ public class RestaurantTableController {
             @PathVariable Long tableId,
             @Valid @RequestBody UpdateTableStatusRequest request
     ) {
-        TableSummaryView updated = tableUseCase.updateTableStatus(tableId, request.status());
+        TableSummaryView updated = tableAdministrationUseCase.updateTableStatus(tableId, request.status());
         return ResponseEntity.ok(tableMapper.toSummaryResponse(updated));
     }
 
@@ -80,7 +91,7 @@ public class RestaurantTableController {
             @Valid @RequestBody AddOrderLineRequest request,
             Authentication authentication
     ) {
-        TableDashboardView view = tableUseCase.addOrderLine(tableId, request.menuItemId(), request.quantity(), authentication.getName());
+        TableDashboardView view = orderUseCase.addOrderLine(tableId, request.menuItemId(), request.quantity(), authentication.getName());
         return ResponseEntity.ok(tableMapper.toDashboardResponse(view));
     }
 
@@ -91,7 +102,7 @@ public class RestaurantTableController {
             @PathVariable Long lineId,
             @Valid @RequestBody UpdateOrderLineRequest request
     ) {
-        TableDashboardView view = tableUseCase.updateOrderLine(tableId, lineId, request.quantity());
+        TableDashboardView view = orderUseCase.updateOrderLine(tableId, lineId, request.quantity());
         return ResponseEntity.ok(tableMapper.toDashboardResponse(view));
     }
 
@@ -101,14 +112,14 @@ public class RestaurantTableController {
             @PathVariable Long tableId,
             @PathVariable Long lineId
     ) {
-        TableDashboardView view = tableUseCase.removeOrderLine(tableId, lineId);
+        TableDashboardView view = orderUseCase.removeOrderLine(tableId, lineId);
         return ResponseEntity.ok(tableMapper.toDashboardResponse(view));
     }
 
     @PostMapping("/{tableId}/close-order")
     @Operation(summary = "Close the current order and free the table")
     public ResponseEntity<TableDashboardResponse> closeOrder(@PathVariable Long tableId) {
-        TableDashboardView view = tableUseCase.closeOrder(tableId);
+        TableDashboardView view = orderUseCase.closeOrder(tableId);
         return ResponseEntity.ok(tableMapper.toDashboardResponse(view));
     }
 }

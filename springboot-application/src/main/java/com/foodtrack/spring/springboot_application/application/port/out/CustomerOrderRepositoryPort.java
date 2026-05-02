@@ -16,4 +16,5 @@ public interface CustomerOrderRepositoryPort {
     Optional<CustomerOrder> findById(Long id);
     List<CustomerOrder> findByTableId(Long tableId);
     List<CustomerOrder> findByStatuses(List<OrderStatus> statuses);
+    boolean existsByCreatedByUserId(Long userId);
 }
