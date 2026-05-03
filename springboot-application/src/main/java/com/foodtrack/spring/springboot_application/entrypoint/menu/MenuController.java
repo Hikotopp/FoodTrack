@@ -27,7 +27,7 @@ public MenuController(MenuUseCase menuUseCase, MenuItemRestMapper menuItemMapper
     this.menuItemMapper = menuItemMapper;
 }
     @GetMapping
-    @Operation(summary = "List all active gourmet menu items")
+    @Operation(summary = "List all active menu items")
     public ResponseEntity<List<MenuItemResponse>> listMenuItems() {
         List<MenuItem> items = menuUseCase.listMenuItems();
         List<MenuItemResponse> response = items.stream()

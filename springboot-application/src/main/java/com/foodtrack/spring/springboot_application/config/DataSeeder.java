@@ -62,36 +62,83 @@ public class DataSeeder {
     }
 
     private void seedMenu(MenuItemRepositoryPort menuItemRepositoryPort) {
-        if (menuItemRepositoryPort.count() > 0) {
+        List<MenuItem> activeItems = menuItemRepositoryPort.findAllActive();
+        boolean saborExpressMenuExists = activeItems.stream()
+                .anyMatch(item -> "Hamburguesa Sabor Express".equals(item.name()));
+        if (saborExpressMenuExists) {
             return;
         }
 
         List<MenuItem> menuItems = List.of(
-                new MenuItem(null, "Tartar de Atun Fresh Track", "Atun fresco en cubos, aguacate, aceite de sesamo, soya y crocante de wonton.", MenuCategory.APPETIZER, new BigDecimal("42000"), true),
-                new MenuItem(null, "Carpaccio de Res al Parmesano", "Laminas de res, rugula, queso parmesano, aceite de oliva extra virgen y reduccion balsamica.", MenuCategory.APPETIZER, new BigDecimal("39000"), true),
-                new MenuItem(null, "Ceviche Caribe FoodTrack", "Pescado blanco y camarones marinados en limon, leche de tigre, mango y cilantro.", MenuCategory.APPETIZER, new BigDecimal("44000"), true),
-                new MenuItem(null, "Crema de Tomate Asado", "Tomates rostizados, albahaca fresca y toque de crema.", MenuCategory.SOUP, new BigDecimal("28000"), true),
-                new MenuItem(null, "Ajiaco FoodTrack Signature", "Pollo, papa criolla, mazorca, guascas, crema de leche y alcaparras.", MenuCategory.SOUP, new BigDecimal("36000"), true),
-                new MenuItem(null, "Lomo de Res en Reduccion de Vino Tinto", "Corte premium, pure rustico y vegetales salteados.", MenuCategory.MAIN_COURSE, new BigDecimal("68000"), true),
-                new MenuItem(null, "Salmon en Costra de Hierbas", "Acompanado de arroz de coco cremoso y esparragos grillados.", MenuCategory.MAIN_COURSE, new BigDecimal("64000"), true),
-                new MenuItem(null, "Pechuga Rellena FoodTrack", "Pollo relleno de espinaca y queso, con salsa blanca y papas rusticas.", MenuCategory.MAIN_COURSE, new BigDecimal("52000"), true),
-                new MenuItem(null, "Pasta Artesanal con Camarones", "Pasta fresca en salsa cremosa de ajo, parmesano y camarones salteados.", MenuCategory.MAIN_COURSE, new BigDecimal("58000"), true),
-                new MenuItem(null, "Risotto de Champinones y Trufa", "Arroz arborio cremoso con champinones frescos y aceite de trufa.", MenuCategory.MAIN_COURSE, new BigDecimal("54000"), true),
-                new MenuItem(null, "Ensalada Cesar Premium", "Pollo grillado, lechuga romana, parmesano y crutones artesanales.", MenuCategory.SALAD, new BigDecimal("35000"), true),
-                new MenuItem(null, "Ensalada Tropical Gourmet", "Mix de lechugas, mango, fresas, nueces y vinagreta de maracuya.", MenuCategory.SALAD, new BigDecimal("33000"), true),
-                new MenuItem(null, "Volcan de Chocolate FoodTrack", "Bizcocho caliente con centro liquido y helado de vainilla.", MenuCategory.DESSERT, new BigDecimal("24000"), true),
-                new MenuItem(null, "Cheesecake de Maracuya", "Cremoso con base crocante y topping acido dulce.", MenuCategory.DESSERT, new BigDecimal("21000"), true),
-                new MenuItem(null, "Brownie con Helado Artesanal", "Brownie tibio con helado y salsa de chocolate.", MenuCategory.DESSERT, new BigDecimal("22000"), true),
-                new MenuItem(null, "Limonada de Coco Premium", "Bebida fresca y cremosa de coco.", MenuCategory.DRINK, new BigDecimal("15000"), true),
-                new MenuItem(null, "Jugos Naturales", "Sabores disponibles: mora, mango y maracuya.", MenuCategory.DRINK, new BigDecimal("12000"), true),
-                new MenuItem(null, "Copa de Vino", "Vino tinto o blanco por copa.", MenuCategory.DRINK, new BigDecimal("20000"), true),
-                new MenuItem(null, "Cocteles de Autor FoodTrack", "Cocteles de la casa desde 28000.", MenuCategory.DRINK, new BigDecimal("28000"), true),
-                new MenuItem(null, "Agua o Gaseosa", "Agua o gaseosa individual.", MenuCategory.DRINK, new BigDecimal("7000"), true)
+                menuItem("Papas a la francesa pequena", "Porcion pequena de papas a la francesa.", MenuCategory.APPETIZER, "5000"),
+                menuItem("Papas a la francesa mediana", "Porcion mediana de papas a la francesa.", MenuCategory.APPETIZER, "7000"),
+                menuItem("Papas a la francesa grande", "Porcion grande de papas a la francesa.", MenuCategory.APPETIZER, "9000"),
+                menuItem("Papas con queso y tocineta", "Papas a la francesa con queso fundido y tocineta.", MenuCategory.APPETIZER, "11000"),
+                menuItem("Aros de cebolla", "Aros de cebolla crocantes.", MenuCategory.APPETIZER, "8000"),
+                menuItem("Nuggets de pollo", "8 unidades de nuggets de pollo.", MenuCategory.APPETIZER, "10000"),
+                menuItem("Dedos de queso", "6 unidades de dedos de queso.", MenuCategory.APPETIZER, "11000"),
+                menuItem("Alitas BBQ", "6 unidades de alitas con salsa BBQ.", MenuCategory.APPETIZER, "12000"),
+                menuItem("Alitas picantes", "6 unidades de alitas con salsa picante.", MenuCategory.APPETIZER, "12000"),
+                menuItem("Hamburguesa clasica", "Carne, queso, vegetales y salsas de la casa.", MenuCategory.BURGER, "12000"),
+                menuItem("Hamburguesa doble carne", "Doble carne, queso, vegetales y salsas de la casa.", MenuCategory.BURGER, "16000"),
+                menuItem("Hamburguesa BBQ", "Carne, queso, tocineta y salsa BBQ.", MenuCategory.BURGER, "15000"),
+                menuItem("Hamburguesa pollo crispy", "Pollo crispy, queso, vegetales y salsas de la casa.", MenuCategory.BURGER, "13000"),
+                menuItem("Hamburguesa vegetariana", "Opcion vegetariana con vegetales y salsas de la casa.", MenuCategory.BURGER, "13000"),
+                menuItem("Hamburguesa Sabor Express", "Especial de la casa: doble carne, doble queso, tocineta, cebolla caramelizada y salsa especial.", MenuCategory.BURGER, "18000"),
+                menuItem("Perro sencillo", "Perro caliente con salchicha, ripio y salsas.", MenuCategory.HOT_DOG, "8000"),
+                menuItem("Perro especial", "Perro caliente con queso, ripio y salsas.", MenuCategory.HOT_DOG, "11000"),
+                menuItem("Super perro", "Perro caliente grande con queso, tocineta, ripio y salsas.", MenuCategory.HOT_DOG, "14000"),
+                menuItem("Perro Explosivo", "Especial de la casa: doble salchicha, queso, tocineta, maiz, ripio y full salsas.", MenuCategory.HOT_DOG, "16000"),
+                menuItem("Burrito de pollo", "Burrito relleno de pollo, vegetales y salsas.", MenuCategory.OTHER, "13000"),
+                menuItem("Burrito de carne", "Burrito relleno de carne, vegetales y salsas.", MenuCategory.OTHER, "13000"),
+                menuItem("Wrap de pollo", "Wrap de pollo con vegetales y salsas.", MenuCategory.OTHER, "12000"),
+                menuItem("Salchipapas", "Papas a la francesa con salchicha y salsas.", MenuCategory.OTHER, "12000"),
+                menuItem("Salchipapa Monster", "Papas, doble salchicha, pollo, carne, queso, tocineta y salsas.", MenuCategory.OTHER, "18000"),
+                menuItem("Sandwich mixto", "Sandwich de jamon y queso.", MenuCategory.OTHER, "8000"),
+                menuItem("Gaseosa personal", "Gaseosa personal.", MenuCategory.DRINK, "4000"),
+                menuItem("Gaseosa 400ml", "Gaseosa de 400ml.", MenuCategory.DRINK, "5000"),
+                menuItem("Gaseosa 1.5L", "Gaseosa de 1.5 litros.", MenuCategory.DRINK, "8000"),
+                menuItem("Jugo natural", "Jugo natural de la casa.", MenuCategory.DRINK, "6000"),
+                menuItem("Limonada natural", "Limonada natural.", MenuCategory.DRINK, "7000"),
+                menuItem("Limonada de coco", "Limonada de coco.", MenuCategory.DRINK, "7000"),
+                menuItem("Te frio", "Te frio.", MenuCategory.DRINK, "5000"),
+                menuItem("Agua", "Agua.", MenuCategory.DRINK, "3000"),
+                menuItem("Malteada", "Malteada de la casa.", MenuCategory.DRINK, "9000"),
+                menuItem("Helado", "Porcion de helado.", MenuCategory.DESSERT, "4000"),
+                menuItem("Brownie con helado", "Brownie con helado.", MenuCategory.DESSERT, "8000"),
+                menuItem("Sundae", "Sundae.", MenuCategory.DESSERT, "6000"),
+                menuItem("Combo clasico", "Incluye hamburguesa clasica, papas y gaseosa 400ml.", MenuCategory.COMBO, "18000"),
+                menuItem("Combo doble carne", "Incluye hamburguesa doble carne, papas y gaseosa 400ml.", MenuCategory.COMBO, "22000"),
+                menuItem("Combo BBQ", "Incluye hamburguesa BBQ, papas y gaseosa 400ml.", MenuCategory.COMBO, "21000"),
+                menuItem("Combo pollo crispy", "Incluye hamburguesa pollo crispy, papas y gaseosa 400ml.", MenuCategory.COMBO, "19000"),
+                menuItem("Combo perro especial", "Incluye perro especial, papas y gaseosa 400ml.", MenuCategory.COMBO, "17000"),
+                menuItem("Combo nuggets", "Incluye nuggets, papas y gaseosa 400ml.", MenuCategory.COMBO, "16000"),
+                menuItem("Combo Sabor Express", "Top ventas: hamburguesa especial, papas grandes y gaseosa.", MenuCategory.COMBO, "26000"),
+                menuItem("Queso extra", "Adicion de queso extra.", MenuCategory.ADDITIONAL, "2000"),
+                menuItem("Tocineta", "Adicion de tocineta.", MenuCategory.ADDITIONAL, "3000"),
+                menuItem("Carne adicional", "Adicion de carne.", MenuCategory.ADDITIONAL, "4000"),
+                menuItem("Salsas extra", "Salsas disponibles: ajo, pina, BBQ, rosada y picante.", MenuCategory.ADDITIONAL, "1000"),
+                menuItem("Promo 2x1 perros sencillos", "Martes y jueves: dos perros sencillos por el precio promocional.", MenuCategory.PROMOTION, "8000")
         );
+
+        for (MenuItem activeItem : activeItems) {
+            menuItemRepositoryPort.save(new MenuItem(
+                    activeItem.id(),
+                    activeItem.name(),
+                    activeItem.description(),
+                    activeItem.category(),
+                    activeItem.price(),
+                    false
+            ));
+        }
 
         for (MenuItem menuItem : menuItems) {
             menuItemRepositoryPort.save(menuItem);
         }
+    }
+
+    private MenuItem menuItem(String name, String description, MenuCategory category, String price) {
+        return new MenuItem(null, name, description, category, new BigDecimal(price), true);
     }
 
     private void seedTables(RestaurantTableRepositoryPort restaurantTableRepositoryPort) {

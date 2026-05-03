@@ -2,11 +2,17 @@ package com.foodtrack.spring.springboot_application.domain.model;
 
 public enum MenuCategory {
     APPETIZER(1),
-    SOUP(2),
-    MAIN_COURSE(3),
-    SALAD(4),
-    DESSERT(5),
-    DRINK(6);
+    BURGER(2),
+    HOT_DOG(3),
+    OTHER(4),
+    DRINK(5),
+    DESSERT(6),
+    COMBO(7),
+    ADDITIONAL(8),
+    PROMOTION(9),
+    SOUP(90),
+    MAIN_COURSE(91),
+    SALAD(92);
 
     private final int displayOrder;
 
