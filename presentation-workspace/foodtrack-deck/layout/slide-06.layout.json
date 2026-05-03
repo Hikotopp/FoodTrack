@@ -1,0 +1,1469 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/70q72x",
+    "id": "70q72x",
+    "slide": 6,
+    "layoutId": "03c56306-1bf8-46c3-8e65-1b244d66ef6f",
+    "layoutName": "Title Slide",
+    "layoutType": "title",
+    "masterLayoutId": "bff7612f-3485-43ea-b4f2-8047b53f0d9f",
+    "masterLayoutName": "Master",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "ChatGPT",
+    "colors": {
+      "accent1": "#156082",
+      "accent2": "#E97132",
+      "accent3": "#196B24",
+      "accent4": "#0F9ED5",
+      "accent5": "#A02B93",
+      "accent6": "#4EA72E",
+      "bg1": "#FFFFFF",
+      "bg2": "#000000",
+      "tx1": "#1F1F1F",
+      "tx2": "#FFFFFF",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#0E2841",
+      "lt2": "#E8E8E8",
+      "hlink": "#467886",
+      "folHlink": "#96607D"
+    },
+    "typefaces": [
+      "Aptos",
+      "Aptos Display",
+      "Aptos Mono"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "03c56306-1bf8-46c3-8e65-1b244d66ef6f",
+      "name": "Title Slide",
+      "type": "title",
+      "parentLayoutId": "bff7612f-3485-43ea-b4f2-8047b53f0d9f",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "bff7612f-3485-43ea-b4f2-8047b53f0d9f",
+      "name": "Master",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/54zidony",
+      "id": "1",
+      "bbox": [
+        0,
+        0,
+        1280,
+        720
+      ],
+      "geometry": "rect",
+      "fillColor": "#F7F5EF",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/udg7adsj",
+      "id": "2",
+      "bbox": [
+        58,
+        50,
+        10,
+        10
+      ],
+      "geometry": "rect",
+      "fillColor": "#2E7D5B",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/nyd0z610",
+      "id": "3",
+      "bbox": [
+        80,
+        44,
+        520,
+        24
+      ],
+      "geometry": "rect",
+      "text": "DATOS Y REPORTE",
+      "textPreview": "DATOS Y REPORTE",
+      "resolvedFontSize": 10,
+      "resolvedTextStyle": {
+        "fontSize": 10,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "DATOS Y REPORTE"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "DATOS Y REPORTE",
+          "runs": [
+            {
+              "index": 1,
+              "text": "DATOS Y REPORTE",
+              "fontSize": 10,
+              "typeface": "Aptos",
+              "color": "#687386",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/cvixczed",
+      "id": "4",
+      "bbox": [
+        58,
+        84,
+        860,
+        96
+      ],
+      "geometry": "rect",
+      "text": "El reporte diario se calcula desde tablas operativas, no desde datos quemados.",
+      "textPreview": "El reporte diario se calcula desde tablas operativas, no desde datos quemados.",
+      "resolvedFontSize": 34,
+      "resolvedTextStyle": {
+        "fontSize": 34,
+        "typeface": "Aptos Display",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "El reporte diario se calcula desde tablas operativas, no desde"
+          },
+          {
+            "index": 2,
+            "text": "datos quemados."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "El reporte diario se calcula desde tablas operativas, no desde datos quemados.",
+          "runs": [
+            {
+              "index": 1,
+              "text": "El reporte diario se calcula desde tablas operativas, no desde datos quemados.",
+              "fontSize": 34,
+              "typeface": "Aptos Display",
+              "color": "#101827",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/5gbq1ory",
+      "id": "5",
+      "bbox": [
+        76,
+        220,
+        172,
+        84
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFFFFF",
+      "lineColor": "#2E7D5B",
+      "lineWidth": 1
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/upwb2hwf",
+      "id": "6",
+      "bbox": [
+        90,
+        232,
+        144,
+        24
+      ],
+      "geometry": "rect",
+      "text": "orders",
+      "textPreview": "orders",
+      "resolvedFontSize": 14,
+      "resolvedTextStyle": {
+        "fontSize": 14,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "orders"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "orders",
+          "runs": [
+            {
+              "index": 1,
+              "text": "orders",
+              "fontSize": 14,
+              "typeface": "Aptos",
+              "color": "#101827",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/nap4r65w",
+      "id": "7",
+      "bbox": [
+        90,
+        260,
+        144,
+        26
+      ],
+      "geometry": "rect",
+      "text": "fecha, mesa/cliente, estado",
+      "textPreview": "fecha, mesa/cliente, estado",
+      "resolvedFontSize": 10.2,
+      "resolvedTextStyle": {
+        "fontSize": 10.2,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "fecha, mesa/cliente, estado"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "fecha, mesa/cliente, estado",
+          "runs": [
+            {
+              "index": 1,
+              "text": "fecha, mesa/cliente, estado",
+              "fontSize": 10.2,
+              "typeface": "Aptos",
+              "color": "#687386"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/c7u54zid",
+      "id": "8",
+      "bbox": [
+        296,
+        220,
+        172,
+        84
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFFFFF",
+      "lineColor": "#2E7D5B",
+      "lineWidth": 1
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/1orytsvu",
+      "id": "9",
+      "bbox": [
+        310,
+        232,
+        144,
+        24
+      ],
+      "geometry": "rect",
+      "text": "order_items",
+      "textPreview": "order_items",
+      "resolvedFontSize": 14,
+      "resolvedTextStyle": {
+        "fontSize": 14,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "order_items"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "order_items",
+          "runs": [
+            {
+              "index": 1,
+              "text": "order_items",
+              "fontSize": 14,
+              "typeface": "Aptos",
+              "color": "#101827",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/l0rqd4vm",
+      "id": "10",
+      "bbox": [
+        310,
+        260,
+        144,
+        26
+      ],
+      "geometry": "rect",
+      "text": "cantidades, subtotales",
+      "textPreview": "cantidades, subtotales",
+      "resolvedFontSize": 10.2,
+      "resolvedTextStyle": {
+        "fontSize": 10.2,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "cantidades, subtotales"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "cantidades, subtotales",
+          "runs": [
+            {
+              "index": 1,
+              "text": "cantidades, subtotales",
+              "fontSize": 10.2,
+              "typeface": "Aptos",
+              "color": "#687386"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/wfyxobm5",
+      "id": "11",
+      "bbox": [
+        516,
+        220,
+        172,
+        84
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFFFFF",
+      "lineColor": "#2E7D5B",
+      "lineWidth": 1
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/7u54zido",
+      "id": "12",
+      "bbox": [
+        530,
+        232,
+        144,
+        24
+      ],
+      "geometry": "rect",
+      "text": "products",
+      "textPreview": "products",
+      "resolvedFontSize": 14,
+      "resolvedTextStyle": {
+        "fontSize": 14,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "products"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "products",
+          "runs": [
+            {
+              "index": 1,
+              "text": "products",
+              "fontSize": 14,
+              "typeface": "Aptos",
+              "color": "#101827",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 13,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ed8bat47",
+      "id": "13",
+      "bbox": [
+        530,
+        260,
+        144,
+        26
+      ],
+      "geometry": "rect",
+      "text": "nombre del producto top",
+      "textPreview": "nombre del producto top",
+      "resolvedFontSize": 10.2,
+      "resolvedTextStyle": {
+        "fontSize": 10.2,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "nombre del producto top"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "nombre del producto top",
+          "runs": [
+            {
+              "index": 1,
+              "text": "nombre del producto top",
+              "fontSize": 10.2,
+              "typeface": "Aptos",
+              "color": "#687386"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 14,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/lc7u54zi",
+      "id": "14",
+      "bbox": [
+        736,
+        220,
+        172,
+        84
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFFFFF",
+      "lineColor": "#D58A24",
+      "lineWidth": 1
+    },
+    {
+      "order": 15,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/wra5gbq1",
+      "id": "15",
+      "bbox": [
+        750,
+        232,
+        144,
+        24
+      ],
+      "geometry": "rect",
+      "text": "app_users",
+      "textPreview": "app_users",
+      "resolvedFontSize": 14,
+      "resolvedTextStyle": {
+        "fontSize": 14,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "app_users"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "app_users",
+          "runs": [
+            {
+              "index": 1,
+              "text": "app_users",
+              "fontSize": 14,
+              "typeface": "Aptos",
+              "color": "#101827",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 16,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/36hcrmhk",
+      "id": "16",
+      "bbox": [
+        750,
+        260,
+        144,
+        26
+      ],
+      "geometry": "rect",
+      "text": "administradores destino",
+      "textPreview": "administradores destino",
+      "resolvedFontSize": 10.2,
+      "resolvedTextStyle": {
+        "fontSize": 10.2,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "administradores destino"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "administradores destino",
+          "runs": [
+            {
+              "index": 1,
+              "text": "administradores destino",
+              "fontSize": 10.2,
+              "typeface": "Aptos",
+              "color": "#687386"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 17,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/eloj2t83",
+      "id": "17",
+      "bbox": [
+        968,
+        190,
+        190,
+        150
+      ],
+      "geometry": "rect",
+      "fillColor": "#CFE0FF",
+      "lineColor": "#2563EB",
+      "lineWidth": 1
+    },
+    {
+      "order": 18,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/pg3ex0nu",
+      "id": "18",
+      "bbox": [
+        990,
+        216,
+        150,
+        22
+      ],
+      "geometry": "rect",
+      "text": "DailySalesReport",
+      "textPreview": "DailySalesReport",
+      "resolvedFontSize": 15,
+      "resolvedTextStyle": {
+        "fontSize": 15,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "DailySalesReport"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "DailySalesReport",
+          "runs": [
+            {
+              "index": 1,
+              "text": "DailySalesReport",
+              "fontSize": 15,
+              "typeface": "Aptos",
+              "color": "#2563EB",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 19,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/wval87ed",
+      "id": "19",
+      "bbox": [
+        990,
+        248,
+        150,
+        84
+      ],
+      "geometry": "rect",
+      "text": "totalSales\norders\nuniqueCustomers\naverageOrder\ntopProduct\nadminEmails",
+      "textPreview": "totalSales | orders | uniqueCustomers | averageOrder | topProduct | adminEmails",
+      "resolvedFontSize": 10.2,
+      "resolvedTextStyle": {
+        "fontSize": 10.2,
+        "typeface": "Aptos Mono",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 6,
+        "lines": [
+          {
+            "index": 1,
+            "text": "totalSales"
+          },
+          {
+            "index": 2,
+            "text": "orders"
+          },
+          {
+            "index": 3,
+            "text": "uniqueCustomers"
+          },
+          {
+            "index": 4,
+            "text": "averageOrder"
+          },
+          {
+            "index": 5,
+            "text": "topProduct"
+          },
+          {
+            "index": 6,
+            "text": "adminEmails"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "totalSales",
+          "runs": [
+            {
+              "index": 1,
+              "text": "totalSales",
+              "fontSize": 10.2,
+              "typeface": "Aptos Mono",
+              "color": "#101827"
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "text": "orders",
+          "runs": [
+            {
+              "index": 1,
+              "text": "orders",
+              "fontSize": 10.2,
+              "typeface": "Aptos Mono",
+              "color": "#101827"
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "text": "uniqueCustomers",
+          "runs": [
+            {
+              "index": 1,
+              "text": "uniqueCustomers",
+              "fontSize": 10.2,
+              "typeface": "Aptos Mono",
+              "color": "#101827"
+            }
+          ]
+        },
+        {
+          "index": 4,
+          "text": "averageOrder",
+          "runs": [
+            {
+              "index": 1,
+              "text": "averageOrder",
+              "fontSize": 10.2,
+              "typeface": "Aptos Mono",
+              "color": "#101827"
+            }
+          ]
+        },
+        {
+          "index": 5,
+          "text": "topProduct",
+          "runs": [
+            {
+              "index": 1,
+              "text": "topProduct",
+              "fontSize": 10.2,
+              "typeface": "Aptos Mono",
+              "color": "#101827"
+            }
+          ]
+        },
+        {
+          "index": 6,
+          "text": "adminEmails",
+          "runs": [
+            {
+              "index": 1,
+              "text": "adminEmails",
+              "fontSize": 10.2,
+              "typeface": "Aptos Mono",
+              "color": "#101827"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 20,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/w3m94fu1",
+      "id": "20",
+      "bbox": [
+        112,
+        450,
+        1,
+        56
+      ],
+      "geometry": "rect",
+      "fillColor": "#2E7D5B",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 21,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/loj2t83i",
+      "id": "21",
+      "bbox": [
+        126,
+        446,
+        216,
+        32
+      ],
+      "geometry": "rect",
+      "text": "$199.000",
+      "textPreview": "$199.000",
+      "resolvedFontSize": 25,
+      "resolvedTextStyle": {
+        "fontSize": 25,
+        "typeface": "Aptos Display",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "$199.000"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "$199.000",
+          "runs": [
+            {
+              "index": 1,
+              "text": "$199.000",
+              "fontSize": 25,
+              "typeface": "Aptos Display",
+              "color": "#101827",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 22,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ex0nuxc3",
+      "id": "22",
+      "bbox": [
+        126,
+        484,
+        216,
+        26
+      ],
+      "geometry": "rect",
+      "text": "Ventas detectadas en prueba local",
+      "textPreview": "Ventas detectadas en prueba local",
+      "resolvedFontSize": 9.51,
+      "resolvedTextStyle": {
+        "fontSize": 9.51,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Ventas detectadas en prueba local"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Ventas detectadas en prueba local",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Ventas detectadas en prueba local",
+              "fontSize": 9.51,
+              "typeface": "Aptos",
+              "color": "#687386",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 23,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/3itgfmlk",
+      "id": "23",
+      "bbox": [
+        410,
+        450,
+        1,
+        56
+      ],
+      "geometry": "rect",
+      "fillColor": "#2563EB",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 24,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/wb2hwfyx",
+      "id": "24",
+      "bbox": [
+        424,
+        446,
+        196,
+        32
+      ],
+      "geometry": "rect",
+      "text": "2",
+      "textPreview": "2",
+      "resolvedFontSize": 25,
+      "resolvedTextStyle": {
+        "fontSize": 25,
+        "typeface": "Aptos Display",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "2"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "2",
+          "runs": [
+            {
+              "index": 1,
+              "text": "2",
+              "fontSize": 25,
+              "typeface": "Aptos Display",
+              "color": "#101827",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 25,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/lwval87e",
+      "id": "25",
+      "bbox": [
+        424,
+        484,
+        196,
+        26
+      ],
+      "geometry": "rect",
+      "text": "Ordenes del dia en la BD",
+      "textPreview": "Ordenes del dia en la BD",
+      "resolvedFontSize": 9.51,
+      "resolvedTextStyle": {
+        "fontSize": 9.51,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Ordenes del dia en la BD"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Ordenes del dia en la BD",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Ordenes del dia en la BD",
+              "fontSize": 9.51,
+              "typeface": "Aptos",
+              "color": "#687386",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 26,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/e9cvixcz",
+      "id": "26",
+      "bbox": [
+        682,
+        450,
+        1,
+        56
+      ],
+      "geometry": "rect",
+      "fillColor": "#D58A24",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 27,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/3q5o7qpg",
+      "id": "27",
+      "bbox": [
+        696,
+        446,
+        206,
+        32
+      ],
+      "geometry": "rect",
+      "text": "Lomo de Res",
+      "textPreview": "Lomo de Res",
+      "resolvedFontSize": 25,
+      "resolvedTextStyle": {
+        "fontSize": 25,
+        "typeface": "Aptos Display",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Lomo de Res"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Lomo de Res",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Lomo de Res",
+              "fontSize": 25,
+              "typeface": "Aptos Display",
+              "color": "#101827",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 28,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/sneloj2t",
+      "id": "28",
+      "bbox": [
+        696,
+        484,
+        206,
+        26
+      ],
+      "geometry": "rect",
+      "text": "Producto mas vendido",
+      "textPreview": "Producto mas vendido",
+      "resolvedFontSize": 9.51,
+      "resolvedTextStyle": {
+        "fontSize": 9.51,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Producto mas vendido"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Producto mas vendido",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Producto mas vendido",
+              "fontSize": 9.51,
+              "typeface": "Aptos",
+              "color": "#687386",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 29,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/l87ed8ba",
+      "id": "29",
+      "bbox": [
+        970,
+        450,
+        1,
+        56
+      ],
+      "geometry": "rect",
+      "fillColor": "#B42318",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 30,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/b6xkf6dc",
+      "id": "30",
+      "bbox": [
+        984,
+        446,
+        216,
+        32
+      ],
+      "geometry": "rect",
+      "text": "jacob@...",
+      "textPreview": "jacob@...",
+      "resolvedFontSize": 25,
+      "resolvedTextStyle": {
+        "fontSize": 25,
+        "typeface": "Aptos Display",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "jacob@..."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "jacob@...",
+          "runs": [
+            {
+              "index": 1,
+              "text": "jacob@...",
+              "fontSize": 25,
+              "typeface": "Aptos Display",
+              "color": "#101827",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 31,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/il0rqd4v",
+      "id": "31",
+      "bbox": [
+        984,
+        484,
+        216,
+        26
+      ],
+      "geometry": "rect",
+      "text": "Admin real; placeholders filtrados",
+      "textPreview": "Admin real; placeholders filtrados",
+      "resolvedFontSize": 9.51,
+      "resolvedTextStyle": {
+        "fontSize": 9.51,
+        "typeface": "Aptos",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Admin real; placeholders filtrados"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Admin real; placeholders filtrados",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Admin real; placeholders filtrados",
+              "fontSize": 9.51,
+              "typeface": "Aptos",
+              "color": "#687386",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 32,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/tcj6tova",
+      "id": "32",
+      "bbox": [
+        58,
+        676,
+        1164,
+        1
+      ],
+      "geometry": "rect",
+      "fillColor": "#D9D3C7",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 33,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/0rqd4vmt",
+      "id": "33",
+      "bbox": [
+        58,
+        688,
+        900,
+        18
+      ],
+      "geometry": "rect",
+      "text": "SalesDataService: orders, order_items, products, app_users | prueba local 2026-05-02",
+      "textPreview": "SalesDataService: orders, order_items, products, app_users | prueba local 2026-05-02",
+      "resolvedFontSize": 8,
+      "resolvedTextStyle": {
+        "fontSize": 8,
+        "typeface": "Aptos",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "SalesDataService: orders, order_items, products, app_users | prueba local 2026-05-02"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "SalesDataService: orders, order_items, products, app_users | prueba local 2026-05-02",
+          "runs": [
+            {
+              "index": 1,
+              "text": "SalesDataService: orders, order_items, products, app_users | prueba local 2026-05-02",
+              "fontSize": 8,
+              "typeface": "Aptos",
+              "color": "#687386"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 34,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/byhgn29g",
+      "id": "34",
+      "bbox": [
+        1180,
+        684,
+        42,
+        20
+      ],
+      "geometry": "rect",
+      "text": "06",
+      "textPreview": "06",
+      "resolvedFontSize": 12,
+      "resolvedTextStyle": {
+        "fontSize": 12,
+        "typeface": "Aptos Display",
+        "bold": true,
+        "alignment": "right"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "06"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "06",
+          "runs": [
+            {
+              "index": 1,
+              "text": "06",
+              "fontSize": 12,
+              "typeface": "Aptos Display",
+              "color": "#101827",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}

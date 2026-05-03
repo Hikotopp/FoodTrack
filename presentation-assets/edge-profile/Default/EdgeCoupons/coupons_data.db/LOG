@@ -1,0 +1,5 @@
+2026/05/02-22:02:53.475 5430 Creating DB C:\Users\jacob\Desktop\Spring\presentation-assets\edge-profile\Default\EdgeCoupons/coupons_data.db since it was missing.
+2026/05/02-22:02:53.509 5430 Reusing MANIFEST C:\Users\jacob\Desktop\Spring\presentation-assets\edge-profile\Default\EdgeCoupons/coupons_data.db/MANIFEST-000001
+2026/05/02-22:02:56.397 5f84 Level-0 table #5: started
+2026/05/02-22:02:56.406 5f84 Level-0 table #5: 682140 bytes OK
+2026/05/02-22:02:56.412 5f84 Delete type=0 #3

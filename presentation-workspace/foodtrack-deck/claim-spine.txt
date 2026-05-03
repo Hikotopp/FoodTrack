@@ -1,0 +1,22 @@
+Thesis
+FoodTrack demuestra una aplicacion full-stack modular para operacion de restaurante, complementada por una API externa de reportes con IA que lee datos reales, genera analisis y notifica a administradores.
+
+Audience
+Docentes/evaluadores tecnicos que necesitan ver arquitectura, implementacion, principios de diseno, operacion y evidencias.
+
+One-line arc
+Del problema operativo a una arquitectura modular, luego a la automatizacion con ReportService, y finalmente a las practicas de calidad: 12-Factor, SOLID, logs, CI/CD y pruebas.
+
+Slide list
+01 Cover: tesis y alcance. Proof: metric rail y capturas.
+02 Arquitectura: dependencias entre Angular, Backend, MySQL, ReportService, OpenAI y Gmail. Proof: mapa de sistema.
+03 Modulos: separacion por capas y responsabilidades. Proof: matriz por modulo.
+04 Experiencia: pantallas de inicio/login y boton de reporte. Proof: capturas.
+05 ReportService: endpoint manual y scheduler. Proof: flujo de servicios.
+06 Datos: tablas consultadas y metricas del reporte diario. Proof: modelo de datos y query outcomes.
+07 12-Factor Apps: aplicacion concreta en el proyecto. Proof: matriz factor/evidencia.
+08 SOLID: principios aplicados en codigo. Proof: clase/principio/evidencia.
+09 Logs y errores: observabilidad y fallback. Proof: lineas de log reales resumidas.
+10 CI/CD: pipeline backend/frontend/docker. Proof: workflow map.
+11 Pruebas: validaciones ejecutadas y resultado de integracion. Proof: checklist.
+12 Cierre: estado actual, riesgos y siguientes pasos.

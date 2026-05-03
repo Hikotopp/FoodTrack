@@ -1,0 +1,13 @@
+Slide size: 1280x720.
+Background: deep ink (#101827) for chapter/architecture slides, warm off-white (#F7F5EF) for evidence and matrix slides.
+Typography: Aptos Display for claims and section headers; Aptos for body; Aptos Mono for code/logs.
+Palette: ink #101827, paper #F7F5EF, white #FFFFFF, soft #6B7280, line #D9D3C7, green #2E7D5B, amber #D58A24, blue #2563EB, red #B42318. Green means working flow, amber means external dependency or warning, blue means API/automation, red means failure/risk.
+Diagram grammar: rectangular nodes with 8px radius max by convention; equal-role nodes share size; lines are thin and direct.
+Connector grammar: direction shown only where data/control actually moves; connector labels stay attached to the line.
+Container grammar: boxes represent real modules/layers/stages, not decoration.
+Footer: source/evidence label left, slide number right.
+Title/kicker: small all-caps kicker, one claim title per slide.
+Data labels: direct labels, no heavy legends.
+Brand cues: FoodTrack wordmark as text only; no fake logo.
+Allowed layouts: cover with metric rail, system map, module matrix, screenshot spread, sequence flow, factor matrix, log terminal, pipeline lane, roadmap.
+Banned motifs: decorative gradients, mascots, fake badges, crowded prose cards, unsupported claims.
