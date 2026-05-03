@@ -24,8 +24,11 @@ services:
         condition: service_healthy
     ports:
       - "8080:8080"
+    volumes:
+      - ./springboot-application/logs:/app/logs
     environment:
       SPRING_PROFILES_ACTIVE: prod
+      LOGGING_FILE_NAME: /app/logs/foodtrack.log
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/${MYSQL_DATABASE:-foodtrack}?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=America/Bogota&characterEncoding=UTF-8
       SPRING_DATASOURCE_USERNAME: ${SPRING_DATASOURCE_USERNAME:-root}
       SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_PASSWORD:?SPRING_DATASOURCE_PASSWORD is required}
