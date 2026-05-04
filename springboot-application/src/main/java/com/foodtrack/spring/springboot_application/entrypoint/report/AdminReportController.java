@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,6 +20,7 @@ import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @RestController
@@ -36,7 +38,9 @@ public class AdminReportController {
             @Value("${report-service.base-url:http://localhost:8081}") String reportServiceBaseUrl
     ) {
         this.salesHistoryUseCase = salesHistoryUseCase;
-        this.reportServiceClient = restClientBuilder.baseUrl(reportServiceBaseUrl).build();
+        this.reportServiceClient = restClientBuilder
+                .baseUrl(Objects.requireNonNull(reportServiceBaseUrl, "reportServiceBaseUrl"))
+                .build();
     }
 
     @PostMapping("/generate-now")
@@ -93,7 +97,8 @@ public class AdminReportController {
             Map<String, Object> response = reportServiceClient.post()
                     .uri("/api/reports/generate-and-send")
                     .retrieve()
-                    .body(Map.class);
+                    .body(new ParameterizedTypeReference<>() {
+                    });
 
             if (response == null) {
                 return new ReportServiceResponse(false, false, List.of(), 0, "ReportService no devolvio respuesta.");
