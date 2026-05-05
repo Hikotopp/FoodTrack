@@ -28,9 +28,9 @@ class SecurityConfigurationTest {
     }
 
     @Test
-    @DisplayName("Should reject public registration endpoint without JWT")
+    @DisplayName("Should allow public registration endpoint without JWT")
     @SuppressWarnings("null")
-    void shouldRejectPublicRegistrationEndpointWithoutJwt() throws Exception {
+    void shouldAllowPublicRegistrationEndpointWithoutJwt() throws Exception {
         mockMvc.perform(post("/api/auth/register")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
@@ -40,7 +40,14 @@ class SecurityConfigurationTest {
                                   "password": "Admin123!"
                                 }
                                 """))
-                .andExpect(status().isForbidden());
+                .andExpect(status().isCreated());
+    }
+
+    @Test
+    @DisplayName("Should expose OpenAPI docs without JWT")
+    void shouldExposeOpenApiDocsWithoutJwt() throws Exception {
+        mockMvc.perform(get("/v3/api-docs"))
+                .andExpect(status().isOk());
     }
 
     @Test
