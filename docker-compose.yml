@@ -2,6 +2,8 @@ services:
   mysql:
     image: mysql:8.0
     container_name: foodtrack-mysql
+    profiles:
+      - docker-db
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:?MYSQL_ROOT_PASSWORD is required}
       MYSQL_DATABASE: ${MYSQL_DATABASE:-foodtrack}
@@ -19,17 +21,16 @@ services:
   backend:
     build: ./springboot-application
     container_name: foodtrack-backend
-    depends_on:
-      mysql:
-        condition: service_healthy
     ports:
       - "8080:8080"
     volumes:
       - ./springboot-application/logs:/app/logs
     environment:
       SPRING_PROFILES_ACTIVE: prod
+      SPRINGDOC_API_DOCS_ENABLED: "true"
+      SPRINGDOC_SWAGGER_UI_ENABLED: "true"
       LOGGING_FILE_NAME: /app/logs/foodtrack.log
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/${MYSQL_DATABASE:-foodtrack}?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=America/Bogota&characterEncoding=UTF-8
+      SPRING_DATASOURCE_URL: jdbc:mysql://host.docker.internal:3306/${MYSQL_DATABASE:-foodtrack}?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=America/Bogota&characterEncoding=UTF-8
       SPRING_DATASOURCE_USERNAME: ${SPRING_DATASOURCE_USERNAME:-root}
       SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_PASSWORD:?SPRING_DATASOURCE_PASSWORD is required}
       JWT_SECRET: ${JWT_SECRET:?JWT_SECRET is required}
@@ -45,13 +46,10 @@ services:
   report-service:
     build: ../ReportService/ReportService
     container_name: foodtrack-report-service
-    depends_on:
-      mysql:
-        condition: service_healthy
     ports:
       - "8081:8081"
     environment:
-      DB_HOST: mysql
+      DB_HOST: host.docker.internal
       DB_PORT: 3306
       DB_NAME: ${MYSQL_DATABASE:-foodtrack}
       DB_USER: ${SPRING_DATASOURCE_USERNAME:-root}
