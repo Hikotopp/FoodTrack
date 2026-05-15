@@ -97,6 +97,32 @@ npm run test -- --watch=false --browsers=ChromeHeadless --code-coverage
 npm run build
 ```
 
+## Calidad con SonarQube
+
+El proyecto incluye `sonar-project.properties` para analizar backend y frontend con SonarQube/SonarCloud.
+
+Para ejecutar analisis local necesitas tener instalado SonarScanner y un token:
+
+```bash
+cd springboot-application
+./mvnw clean test
+
+cd ../foodtrack
+npm ci
+npm run test -- --watch=false --browsers=ChromeHeadless --code-coverage
+
+cd ..
+sonar-scanner -Dsonar.token=TU_TOKEN
+```
+
+En GitHub Actions el job de Sonar se ejecuta automaticamente cuando configures el secreto:
+
+```text
+SONAR_TOKEN
+```
+
+Si no existe ese secreto, el pipeline no falla; simplemente omite el analisis de Sonar.
+
 ## Variables importantes
 
 Revisa `.env.example` para las variables necesarias. El archivo real `.env` esta ignorado por Git y no debe subirse.

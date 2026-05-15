@@ -170,14 +170,11 @@
             </plugin>
             
             <!-- JaCoCo for Code Coverage (sin validación) -->
-            <!-- Disabled for Java 25 compatibility - JaCoCo 0.8.12 does not fully support class file major version 69 -->
-            <!-- To re-enable, downgrade JDK to 21 or wait for JaCoCo to fully support Java 25 -->
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.8.12</version>
                 <executions>
-                    <!-- Disabled: prepare-agent instrumentation fails on Java 25
                     <execution>
                         <goals>
                             <goal>prepare-agent</goal>
@@ -190,7 +187,6 @@
                             <goal>report</goal>
                         </goals>
                     </execution>
-                    -->
                     <!-- Validación de cobertura desactivada (comentada)
                     <execution>
                         <id>jacoco-check</id>
