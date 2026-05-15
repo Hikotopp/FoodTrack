@@ -8,5 +8,6 @@ public record MenuItemResponse(
         String description,
         String category,
         BigDecimal price,
+        int stockQuantity,
         boolean available
 ) {}

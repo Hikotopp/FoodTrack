@@ -25,6 +25,9 @@ public class MenuItemEntity {
     private BigDecimal price;
 
     @Column(nullable = false)
+    private int stockQuantity;
+
+    @Column(nullable = false)
     private boolean active;
 
     public Long getId() {
@@ -65,6 +68,14 @@ public class MenuItemEntity {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    public int getStockQuantity() {
+        return stockQuantity;
+    }
+
+    public void setStockQuantity(int stockQuantity) {
+        this.stockQuantity = stockQuantity;
     }
 
     public boolean isActive() {

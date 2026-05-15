@@ -128,6 +128,7 @@ public class DataSeeder {
                     activeItem.description(),
                     activeItem.category(),
                     activeItem.price(),
+                    activeItem.stockQuantity(),
                     false
             ));
         }
@@ -138,7 +139,7 @@ public class DataSeeder {
     }
 
     private MenuItem menuItem(String name, String description, MenuCategory category, String price) {
-        return new MenuItem(null, name, description, category, new BigDecimal(price), true);
+        return new MenuItem(null, name, description, category, new BigDecimal(price), 100, true);
     }
 
     private void seedTables(RestaurantTableRepositoryPort restaurantTableRepositoryPort) {

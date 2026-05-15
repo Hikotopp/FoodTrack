@@ -13,6 +13,7 @@ public class MenuItemRestMapper {
                 item.description(),
                 item.category().name(),
                 item.price(),
+                item.stockQuantity(),
                 item.active()
         );
     }

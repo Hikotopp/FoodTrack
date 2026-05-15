@@ -8,6 +8,7 @@ import java.util.Optional;
 import org.springframework.lang.NonNull;
 
 public interface MenuItemRepositoryPort {
+    List<MenuItem> findAll();
     List<MenuItem> findAllActive();
     Optional<MenuItem> findById(@NonNull Long id);
     MenuItem save(MenuItem menuItem);

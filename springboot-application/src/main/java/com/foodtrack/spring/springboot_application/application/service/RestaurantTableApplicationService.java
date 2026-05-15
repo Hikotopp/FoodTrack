@@ -139,6 +139,10 @@ public class RestaurantTableApplicationService implements TableUseCase {
                     logger.error("Menu item not found: {}", menuItemId);
                     return new ResourceNotFoundException("Menu item not found.");
                 });
+        if (!menuItem.active()) {
+            throw new BusinessRuleException("This menu item is not available.");
+        }
+        ensureStock(menuItem, quantity);
         AppUser user = userRepositoryPort.findByEmail(normalizeEmail(currentUserEmail))
                 .orElseThrow(() -> {
                     logger.error("Authenticated user not found: {}", currentUserEmail);
@@ -151,6 +155,7 @@ public class RestaurantTableApplicationService implements TableUseCase {
         List<OrderLine> mergedLines = orderCalculator.mergeOrderLine(currentOrder.lines(), menuItem, quantity);
         CustomerOrder recalculatedOrder = orderCalculator.recalculate(currentOrder, mergedLines, OrderStatus.OPEN);
         customerOrderRepositoryPort.save(recalculatedOrder);
+        updateMenuItemStock(menuItem, menuItem.stockQuantity() - quantity);
 
         if (table.status() == TableStatus.AVAILABLE || table.status() == TableStatus.CLEANING) {
             restaurantTableRepositoryPort.save(new RestaurantTable(table.id(), table.tableNumber(), TableStatus.OCCUPIED));
@@ -165,7 +170,16 @@ public class RestaurantTableApplicationService implements TableUseCase {
     public TableDashboardView updateOrderLine(Long tableId, Long lineId, int quantity) {
         logger.info("Updating order line: tableId={}, lineId={}, new quantity={}", tableId, lineId, quantity);
         CustomerOrder currentOrder = getOpenOrder(tableId);
-        ensureLineExists(currentOrder.lines(), lineId);
+        OrderLine existingLine = getOrderLine(currentOrder.lines(), lineId);
+        int stockDelta = quantity - existingLine.quantity();
+        if (stockDelta > 0) {
+            MenuItem menuItem = getMenuItem(existingLine.menuItemId());
+            ensureStock(menuItem, stockDelta);
+            updateMenuItemStock(menuItem, menuItem.stockQuantity() - stockDelta);
+        } else if (stockDelta < 0) {
+            MenuItem menuItem = getMenuItem(existingLine.menuItemId());
+            updateMenuItemStock(menuItem, menuItem.stockQuantity() + Math.abs(stockDelta));
+        }
         List<OrderLine> updatedLines = orderCalculator.updateQuantity(currentOrder.lines(), lineId, quantity);
         customerOrderRepositoryPort.save(orderCalculator.recalculate(currentOrder, updatedLines, OrderStatus.OPEN));
         logger.info("Order line {} updated for table {}", lineId, tableId);
@@ -186,6 +200,9 @@ public class RestaurantTableApplicationService implements TableUseCase {
             logger.warn("Order line {} not found in table {}", lineId, tableId);
             throw new ResourceNotFoundException("Order line was not found.");
         }
+        OrderLine removedLine = getOrderLine(currentOrder.lines(), lineId);
+        MenuItem removedMenuItem = getMenuItem(removedLine.menuItemId());
+        updateMenuItemStock(removedMenuItem, removedMenuItem.stockQuantity() + removedLine.quantity());
 
         if (remainingLines.isEmpty()) {
             logger.debug("No remaining lines, deleting order and freeing table {}", tableId);
@@ -227,6 +244,11 @@ public class RestaurantTableApplicationService implements TableUseCase {
                 .orElseThrow(() -> new ResourceNotFoundException("Open order was not found for this table."));
     }
 
+    private MenuItem getMenuItem(Long menuItemId) {
+        return menuItemRepositoryPort.findById(menuItemId)
+                .orElseThrow(() -> new ResourceNotFoundException("Menu item not found."));
+    }
+
     private CustomerOrder createOpenOrder(Long tableId, Long userId) {
         LocalDateTime now = LocalDateTime.now();
         return new CustomerOrder(
@@ -241,19 +263,41 @@ public class RestaurantTableApplicationService implements TableUseCase {
         );
     }
 
-    private void ensureLineExists(List<OrderLine> lines, Long lineId) {
-        boolean exists = lines.stream().anyMatch(line -> line.id().equals(lineId));
-        if (!exists) {
-            throw new ResourceNotFoundException("Order line was not found.");
-        }
+    private OrderLine getOrderLine(List<OrderLine> lines, Long lineId) {
+        return lines.stream()
+                .filter(line -> line.id().equals(lineId))
+                .findFirst()
+                .orElseThrow(() -> new ResourceNotFoundException("Order line was not found."));
     }
 
     private List<MenuItem> getSortedMenu() {
         return menuItemRepositoryPort.findAllActive().stream()
+                .filter(item -> item.stockQuantity() > 0)
                 .sorted(Comparator
                         .comparingInt((MenuItem item) -> item.category().getDisplayOrder())
                         .thenComparing(MenuItem::name))
                 .toList();
+    }
+
+    private void ensureStock(MenuItem menuItem, int quantity) {
+        if (quantity <= 0) {
+            throw new BusinessRuleException("Quantity must be greater than zero.");
+        }
+        if (menuItem.stockQuantity() < quantity) {
+            throw new BusinessRuleException("Not enough stock for this menu item.");
+        }
+    }
+
+    private void updateMenuItemStock(MenuItem menuItem, int stockQuantity) {
+        menuItemRepositoryPort.save(new MenuItem(
+                menuItem.id(),
+                menuItem.name(),
+                menuItem.description(),
+                menuItem.category(),
+                menuItem.price(),
+                Math.max(0, stockQuantity),
+                menuItem.active()
+        ));
     }
 
     private TableSummaryView toSummary(RestaurantTable table, CustomerOrder currentOrder) {

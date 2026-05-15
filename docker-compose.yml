@@ -30,7 +30,7 @@ services:
       SPRINGDOC_API_DOCS_ENABLED: "true"
       SPRINGDOC_SWAGGER_UI_ENABLED: "true"
       LOGGING_FILE_NAME: /app/logs/foodtrack.log
-      SPRING_DATASOURCE_URL: jdbc:mysql://host.docker.internal:3306/${MYSQL_DATABASE:-foodtrack}?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=America/Bogota&characterEncoding=UTF-8
+      SPRING_DATASOURCE_URL: jdbc:mysql://host.docker.internal:3307/${MYSQL_DATABASE:-foodtrack}?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=America/Bogota&characterEncoding=UTF-8
       SPRING_DATASOURCE_USERNAME: ${SPRING_DATASOURCE_USERNAME:-root}
       SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_PASSWORD:?SPRING_DATASOURCE_PASSWORD is required}
       JWT_SECRET: ${JWT_SECRET:?JWT_SECRET is required}
@@ -50,7 +50,7 @@ services:
       - "8081:8081"
     environment:
       DB_HOST: host.docker.internal
-      DB_PORT: 3306
+      DB_PORT: 3307
       DB_NAME: ${MYSQL_DATABASE:-foodtrack}
       DB_USER: ${SPRING_DATASOURCE_USERNAME:-root}
       DB_PASSWORD: ${SPRING_DATASOURCE_PASSWORD:?SPRING_DATASOURCE_PASSWORD is required}

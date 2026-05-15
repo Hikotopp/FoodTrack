@@ -8,6 +8,7 @@ public record MenuItem(
         String description,
         MenuCategory category,
         BigDecimal price,
+        int stockQuantity,
         boolean active
 ) {
 }

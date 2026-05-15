@@ -15,6 +15,7 @@ public class MenuItemMapper {
                 entity.getDescription(),
                 MenuCategory.valueOf(entity.getCategory()),
                 entity.getPrice(),
+                entity.getStockQuantity(),
                 entity.isActive()
         );
     }
@@ -26,6 +27,7 @@ public class MenuItemMapper {
         entity.setDescription(menuItem.description());
         entity.setCategory(menuItem.category().name());
         entity.setPrice(menuItem.price());
+        entity.setStockQuantity(menuItem.stockQuantity());
         entity.setActive(menuItem.active());
         return entity;
     }

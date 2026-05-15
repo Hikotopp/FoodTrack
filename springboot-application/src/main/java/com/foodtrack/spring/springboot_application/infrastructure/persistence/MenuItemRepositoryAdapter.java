@@ -22,6 +22,13 @@ public class MenuItemRepositoryAdapter implements MenuItemRepositoryPort {
     }
 
     @Override
+    public List<MenuItem> findAll() {
+        return jpaMenuItemRepository.findAll().stream()
+                .map(menuItemMapper::toDomain)
+                .toList();
+    }
+
+    @Override
     public List<MenuItem> findAllActive() {
         return jpaMenuItemRepository.findByActiveTrue().stream()
                 .map(menuItemMapper::toDomain)

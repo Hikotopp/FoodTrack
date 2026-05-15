@@ -5,6 +5,8 @@ import com.foodtrack.spring.springboot_application.application.port.in.SalesHist
 import com.foodtrack.spring.springboot_application.domain.model.OrderLine;
 import com.foodtrack.spring.springboot_application.domain.model.OrderStatus;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Value;
@@ -46,6 +48,10 @@ public class AdminReportController {
     @PostMapping("/generate-now")
     @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Generate and send sales report")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Sales report generated and sent"),
+            @ApiResponse(responseCode = "403", description = "Missing JWT token or authenticated user is not an admin")
+    })
     public ResponseEntity<AdminReportResponse> generateNow() {
         List<SalesHistoryView> sales = salesHistoryUseCase.listHistory();
         BigDecimal totalClosedSales = sales.stream()
