@@ -28,6 +28,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 
 @Service
 @Transactional
@@ -245,7 +246,8 @@ public class RestaurantTableApplicationService implements TableUseCase {
     }
 
     private MenuItem getMenuItem(Long menuItemId) {
-        return menuItemRepositoryPort.findById(menuItemId)
+        Long requiredMenuItemId = Objects.requireNonNull(menuItemId, "Menu item id cannot be null.");
+        return menuItemRepositoryPort.findById(requiredMenuItemId)
                 .orElseThrow(() -> new ResourceNotFoundException("Menu item not found."));
     }
 

@@ -15,6 +15,7 @@ import java.math.BigDecimal;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 @Service
 @Transactional(readOnly = true)
@@ -95,7 +96,8 @@ public class MenuCatalogService implements MenuUseCase {
     }
 
     private MenuItem getMenuItem(Long id) {
-        return menuItemRepositoryPort.findById(id)
+        Long menuItemId = Objects.requireNonNull(id, "Menu item id cannot be null.");
+        return menuItemRepositoryPort.findById(menuItemId)
                 .orElseThrow(() -> new ResourceNotFoundException("Menu item not found."));
     }
 
