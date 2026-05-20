@@ -1,0 +1,59 @@
+name: SonarQube
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+permissions:
+  contents: read
+
+jobs:
+  sonar:
+    name: Backend and frontend analysis
+    runs-on: ubuntu-latest
+    env:
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+          cache: maven
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: foodtrack/package-lock.json
+
+      - name: Backend - test and generate JaCoCo coverage
+        working-directory: springboot-application
+        run: ./mvnw --batch-mode clean test
+
+      - name: Frontend - install dependencies
+        working-directory: foodtrack
+        run: npm ci
+
+      - name: Frontend - test and generate LCOV coverage
+        working-directory: foodtrack
+        run: npm run test -- --watch=false --browsers=ChromeHeadless --code-coverage
+
+      - name: Run SonarQube scan for backend and frontend
+        if: env.SONAR_TOKEN != ''
+        uses: SonarSource/sonarqube-scan-action@v7
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+      - name: Skip SonarQube scan
+        if: env.SONAR_TOKEN == ''
+        run: echo "SONAR_TOKEN is not configured. Add it as a GitHub secret to enable SonarQube analysis."

@@ -17,5 +17,9 @@
     ],
     "java.compile.nullAnalysis.mode": "automatic",
     "java.configuration.updateBuildConfiguration": "interactive",
-    "CodeGPT.apiKey": "Anthropic"
+    "CodeGPT.apiKey": "Anthropic",
+    "sonarlint.connectedMode.project": {
+        "connectionId": "hikotoppft",
+        "projectKey": "Hikotopp_Backend_FoodTrack"
+    }
 }
