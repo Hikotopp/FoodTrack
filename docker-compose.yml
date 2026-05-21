@@ -17,7 +17,7 @@ services:
     restart: unless-stopped
 
   backend:
-    build: ./springboot-application
+    build: ../Backend_FoodTrack
     container_name: foodtrack-backend
     depends_on:
       mysql:
@@ -25,7 +25,7 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      - ./springboot-application/logs:/app/logs
+      - ../Backend_FoodTrack/logs:/app/logs
     environment:
       SPRING_PROFILES_ACTIVE: prod
       SPRINGDOC_API_DOCS_ENABLED: "true"
@@ -67,7 +67,7 @@ services:
     restart: unless-stopped
 
   frontend:
-    build: ./foodtrack
+    build: ../Frontend_FoodTrack
     container_name: foodtrack-frontend
     depends_on:
       backend:
